@@ -4,14 +4,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "datakhanon"
-version = "0.1.0"
+version = "0.1.1"
 description = "Biblioteca para mineração de dados e aprendizado de máquina com fluxo end-to-end."
-readme = "README.md"
+readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.9"
-license = { file = "LICENSE" }
+
+# SPDX expression + arquivos de licença
+license = "MIT"
+license-files = ["LICENSE"]
 
 authors = [
-  { name = "Vinicius Santos", email = "vinicius.santos@ifsp.edu.br" },
+  { name = "Vinicius de Souza Santos", email = "vinicius.santos@ifsp.edu.br" },
+]
+
+maintainers = [
+  { name = "ViniciusKanh", email = "vinicius.santos@ifsp.edu.br" },
 ]
 
 keywords = [
@@ -24,14 +31,7 @@ keywords = [
   "datakhanon",
 ]
 
-# ==========================
 # Dependências principais
-# ==========================
-# Necessário para:
-# - pré-processamento (pandas, numpy, scikit-learn, scipy, imbalanced-learn)
-# - modelagem clássica
-# - relatórios/EDA (matplotlib, seaborn)
-# - serialização/configuração (joblib, PyYAML)
 dependencies = [
   "numpy>=1.24",
   "pandas>=2.0",
@@ -41,18 +41,16 @@ dependencies = [
   "seaborn>=0.13",
   "joblib>=1.3",
   "PyYAML>=6.0",
-  "imbalanced-learn>=0.12",  # oversampling/undersampling em pipelines
+  "imbalanced-learn>=0.12",
 ]
 
-# ==========================
-# Metadados adicionais
-# ==========================
+# Classifiers (mantidos, sem duplicar licença para evitar warnings)
 classifiers = [
+  "Development Status :: 4 - Beta",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
-  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
@@ -63,51 +61,32 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/ViniciusKanh/datakhanon"
 "Bug Tracker" = "https://github.com/ViniciusKanh/datakhanon/issues"
-Documentation = "https://github.com/ViniciusKanh/datakhanon"  # ajuste quando tiver docs separados
+Documentation = "https://github.com/ViniciusKanh/datakhanon"
 Source = "https://github.com/ViniciusKanh/datakhanon"
 
-# ==========================
-# Descoberta de pacotes
-# ==========================
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["datakhanon*"]
+# Expor um script CLI (opcional)
+[project.scripts]
+datakhanon = "datakhanon.cli:main"
 
-[tool.setuptools]
-include-package-data = true
-
-# ==========================
-# Dependências opcionais
-# ==========================
+# Optional dependencies (extras)
+# Observação: evite colocar dependências com URL de wheel aqui — o PyPI rejeita.
 [project.optional-dependencies]
-
-# Visualização extra (além de matplotlib/seaborn)
 viz = [
   "plotly>=5.0",
   "bokeh>=3.0",
 ]
-
-# Dashboards interativos
 dashboard = [
   "streamlit>=1.30",
 ]
-
-# Explicabilidade de modelos
 explainer = [
   "shap>=0.44",
 ]
-
-# Redução de dimensionalidade / embedding para visualização
 embed = [
   "umap-learn>=0.5",
 ]
+# Se tiver dependência privada (auto-ensemble-benchmark), coloque instrução no README
+ensemble = []
 
-# Experimentos de ensemble avançados (sua outra lib)
-ensemble = [
-  "auto-ensemble-benchmark @ https://github.com/ViniciusKanh/auto-ensemble-benchmark/releases/download/v0.1.3/auto_ensemble_benchmark-0.1.3-py3-none-any.whl"
-]
-
-# Dependências de desenvolvimento (não vão para o usuário final)
 dev = [
   "black>=24.0",
   "isort>=5.13",
@@ -119,9 +98,15 @@ dev = [
   "build>=1.0",
 ]
 
-# ==========================
-# Ferramentas internas
-# ==========================
+# Setuptools-specific options
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["datakhanon*"]
+
 [tool.black]
 line-length = 88
 target-version = ["py39", "py310", "py311"]
+skip-string-normalization = true
