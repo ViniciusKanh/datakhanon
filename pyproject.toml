@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "datakhanon"
-version = "0.1.1"
+version = "0.1.2"
 description = "Biblioteca para mineração de dados e aprendizado de máquina com fluxo end-to-end."
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.9"
@@ -69,7 +69,7 @@ Source = "https://github.com/ViniciusKanh/datakhanon"
 datakhanon = "datakhanon.cli:main"
 
 # Optional dependencies (extras)
-# Observação: evite colocar dependências com URL de wheel aqui — o PyPI rejeita.
+# OBS: evite dependências com URL direto — PyPI rejeita esses em metadata.
 [project.optional-dependencies]
 viz = [
   "plotly>=5.0",
@@ -84,7 +84,8 @@ explainer = [
 embed = [
   "umap-learn>=0.5",
 ]
-# Se tiver dependência privada (auto-ensemble-benchmark), coloque instrução no README
+# se tiver um pacote privado "auto-ensemble-benchmark", não inclua como URL aqui;
+# documente no README como instalar manualmente ou publique o dependente no PyPI.
 ensemble = []
 
 dev = [

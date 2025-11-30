@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include datakhanon_logo.png
+recursive-include datakhanon *.py *.yaml *.yml
+recursive-include examples *.py *.ipynb
+recursive-include tests *.py
+recursive-include datakhanon *.csv
